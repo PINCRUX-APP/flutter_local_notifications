@@ -272,6 +272,9 @@ public class FlutterLocalNotificationsPlugin
     intent.setAction(SELECT_NOTIFICATION);
     intent.putExtra(NOTIFICATION_ID, notificationDetails.id);
     intent.putExtra(PAYLOAD, notificationDetails.payload);
+    // @jimmy 25/10/29 추가
+    intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+    
     int flags = PendingIntent.FLAG_UPDATE_CURRENT;
     if (VERSION.SDK_INT >= VERSION_CODES.M) {
       flags |= PendingIntent.FLAG_IMMUTABLE;
@@ -315,6 +318,9 @@ public class FlutterLocalNotificationsPlugin
           actionIntent = new Intent(context, ActionBroadcastReceiver.class);
           actionIntent.setAction(ActionBroadcastReceiver.ACTION_TAPPED);
         }
+
+        // @jimmy 25/10/29 추가
+        actionIntent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
         actionIntent
             .putExtra(NOTIFICATION_ID, notificationDetails.id)
