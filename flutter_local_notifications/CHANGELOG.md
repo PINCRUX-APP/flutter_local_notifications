@@ -1,11 +1,48 @@
-## [20.0.0-dev.2]
+## [21.0.0]
 
-* [Android] updated Java compatibility version to 17
+* **Breaking change** bumped minimum Flutter SDK requirement to 3.38.1 and Dart SDK requirement to 3.10.0. Consequently the minimum OS requirements for each platform has been updated as well
+  * [Android] minimum Android version is now 7.0 (API level 24)
+  * [iOS] minimum iOS version is now 13
+  * [macOS] minimum macOS version is now 10.15
+* Bumped `timezone` dependency
+* [Android] **Breaking change** bumped `compileSdk` to 36 and updated readme to mention this
+* [Android] bumped Android Gradle Plugin (AGP) to 8.11.1 
+* Migrated example app to `UIScene` lifecycle
+* Updated readme to specify changes needed for applications that have migrated to `UIScene` lifecycle
+* Updated iOS-specific setup around registering `UNUserNotificationCenterDelegate` to remove redundant `available` check and to be more specific that it should be done in the `application:didFinishLaunchingWithOptions:` method
+* Bumped `flutter_timezone` dependency in example app
 
-## [20.0.0-dev.1]
+## [20.1.0]
+
+* [iOS] added CarPlay notification support. Thanks to the PR from [derrik f](https://github.com/derrik-fleming)
+* [iOS][macOS] the `ActiveNotification` class now returns values for `groupKey` property if applicable. This depends on if the `threadIdentifier` was specified when creating the notification itself. Thanks to the PR from [Kwon Tae Hyung](https://github.com/TaeBbong)
+* [Windows] non-functional change: addressed the [`use_null_aware_elements`](https://dart.dev/tools/diagnostics/use_null_aware_elements) linter issue
+
+## [20.0.0]
 
 * **Breaking change** bumped minimum Flutter SDK requirement to 3.32.0 and Dart SDK requirement to 3.8.0
+* **Breaking changes** the positional parameters in the following methods have now been converted to named parameters across all platforms. Thanks to the PR started by [Kwon Tae Hyung](https://github.com/TaeBbong)
+  * `initialize()`
+  * `show()`
+  * `periodicallyShow()`
+  * `periodicallyShowWithDuration()`
+  * `cancel()`
+  * `zonedSchedule()`
+* [Android] **Breaking changes** the positional parameters in the following methods have now been converted to named parameters
+  * `startForegroundService()`
+  * `deleteNotificationChannelGroup()`
+  * `deleteNotificationChannel()`
+  * `getActiveNotificationMessagingStyle()`
+* [Linux] **Breaking changes** the positional parameters in the `LinuxNotificationCustomHint()` method have now been converted to named parameters
+* [Windows] * **Breaking changes** the positional parameters in the following methods have now been converted to named parameters
+  * `showRawXml()`
+  * `zonedScheduleRawXml()`
+* [Windows] **Breaking changes** to align with the main the plugin, the following parameters have been renamed
+  * the `details` parameter in the `show()` and `zonedSchedule()` methods has been renamed to `notificationDetails`
+  * the `onNotificationReceived` in the `initialize()` method has been renamed to `onDidReceiveNotificationResponse`
 * [Windows] **Breaking change** removed the `details` parameter from the `zonedScheduleRawXml()` method as it was not actually used. Thanks to the PR from [Levi Lesches](https://github.com/Levi-Lesches)
+* [Android] updated Java compatibility version to 17
+* [Android] fixed issue [#2745](https://github.com/MaikuB/flutter_local_notifications/issues/2745) to export the `AndroidIcon` abstract class 
 * Updated readme with information for developers that plan to move to use the UIScene lifecycle
 * Added `flutter_lints` to apply linter rules
 
